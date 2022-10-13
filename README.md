@@ -4,7 +4,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Description
 
-使用ReactJS開發, 使用styled-compoentns方式設計CSS, 用redux管理state
+使用ReactJS開發, 使用styled-components方式設計CSS, 用redux管理state
 
 <div align="center"><img src="https://github.com/jie-cat/todolist-react-redux/blob/main/src/assets/todoapp.png"></div>
 
