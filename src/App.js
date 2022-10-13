@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { IoMdAdd } from "react-icons/io";
 import styled from "styled-components";
 // Components
 import Todo from "./components/Todo";
 // Redux
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -49,6 +49,7 @@ const AddBtn = styled.button`
   margin-left: 0.75rem;
   color: rgb(241 245 249);
   border: none;
+  cursor: pointer;
 `;
 
 function App() {
@@ -64,15 +65,28 @@ function App() {
     );
     return list;
   };
-  // add
+  // addTodo
+  const [newTodo, setNewTodo] = useState("");
+
+  const dispatch = useDispatch();
+
+  let addTodo = (e) => {
+    e.preventDefault();
+    if (newTodo === "") return;
+    dispatch({
+      type: "ADD_TODO",
+      task: newTodo,
+    });
+    setNewTodo("");
+  };
 
   return (
     <Wrapper>
       <Container>
         <Title>Todo App</Title>
         <Form>
-          <Input />
-          <AddBtn>
+          <Input onChange={(e) => setNewTodo(e.target.value)} />
+          <AddBtn onClick={(e) => addTodo(e)}>
             <IoMdAdd size={30} />
           </AddBtn>
         </Form>
