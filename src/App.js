@@ -65,7 +65,7 @@ function App() {
     );
     return list;
   };
-  // addTodo
+  // addTodo dispatch action so that return new state
   const [newTodo, setNewTodo] = useState("");
 
   const dispatch = useDispatch();

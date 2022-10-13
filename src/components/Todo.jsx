@@ -1,9 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 import { FaTrashAlt } from "react-icons/fa";
+import { useDispatch } from "react-redux";
 
 const Wrapper = styled.li`
-  background-color: rgb(226 232 240);
+  background-color: ${(props) =>
+    props.isCompleted ? "rgb(148 163 184)" : "rgb(226 232 240)"};
   display: flex;
   justify-content: space-between;
   margin: 0.75rem 0;
@@ -25,6 +27,7 @@ const Context = styled.p`
   font-size: 1.25rem;
   line-height: 1.75rem;
   flex-grow: 1;
+  text-decoration: ${(props) => (props.isCompleted ? "line-through" : "none")};
 `;
 
 const DeleteBtn = styled.button`
@@ -36,11 +39,20 @@ const DeleteBtn = styled.button`
 `;
 
 const Todo = ({ context, isCompleted, idx }) => {
+  // update todo toggle
+  const dispatch = useDispatch();
+  const toggleTodo = () => {
+    dispatch({
+      type: "UPDATE_TODO",
+      idx: idx,
+    });
+  };
+
   return (
-    <Wrapper>
+    <Wrapper isCompleted={isCompleted}>
       <Row>
-        <CheckBox checked={isCompleted} />
-        <Context>{context}</Context>
+        <CheckBox checked={isCompleted} onChange={() => toggleTodo()} />
+        <Context isCompleted={isCompleted}>{context}</Context>
       </Row>
       <DeleteBtn>
         <FaTrashAlt />
