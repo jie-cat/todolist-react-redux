@@ -39,11 +39,18 @@ const DeleteBtn = styled.button`
 `;
 
 const Todo = ({ context, isCompleted, idx }) => {
-  // update todo toggle
+  // update todo for toggle
   const dispatch = useDispatch();
   const toggleTodo = () => {
     dispatch({
       type: "UPDATE_TODO",
+      idx: idx,
+    });
+  };
+  // delete todo
+  const deleteTodo = () => {
+    dispatch({
+      type: "DELETE_TODO",
       idx: idx,
     });
   };
@@ -55,7 +62,7 @@ const Todo = ({ context, isCompleted, idx }) => {
         <Context isCompleted={isCompleted}>{context}</Context>
       </Row>
       <DeleteBtn>
-        <FaTrashAlt />
+        <FaTrashAlt onClick={() => deleteTodo()} />
       </DeleteBtn>
     </Wrapper>
   );

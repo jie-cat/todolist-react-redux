@@ -12,6 +12,8 @@ export default function todos(state = initialState, action) {
       let newState = [...state];
       newState[action.idx].isCompleted = !newState[action.idx].isCompleted;
       return newState;
+    case "DELETE_TODO":
+      return [...state.slice(0, action.idx), ...state.slice(action.idx + 1)];
     default:
       return state;
   }
