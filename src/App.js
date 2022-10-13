@@ -3,6 +3,8 @@ import { IoMdAdd } from "react-icons/io";
 import styled from "styled-components";
 // Components
 import Todo from "./components/Todo";
+// Redux
+import { useSelector } from "react-redux";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -50,6 +52,20 @@ const AddBtn = styled.button`
 `;
 
 function App() {
+  const todoList = useSelector((store) => store.todos);
+
+  // return todoReducer default state
+  let renderTodo = () => {
+    let list = [];
+    todoList.forEach((item, index) =>
+      list.push(
+        <Todo context={item.task} isCompleted={item.isCompleted} idx={index} />
+      )
+    );
+    return list;
+  };
+  // add
+
   return (
     <Wrapper>
       <Container>
@@ -61,11 +77,7 @@ function App() {
           </AddBtn>
         </Form>
         {/* TodoList container */}
-        <ul>
-          <Todo />
-          <Todo />
-          <Todo />
-        </ul>
+        <ul>{renderTodo()}</ul>
       </Container>
     </Wrapper>
   );

@@ -35,12 +35,12 @@ const DeleteBtn = styled.button`
   border: none;
 `;
 
-const Todo = () => {
+const Todo = ({ context, isCompleted, idx }) => {
   return (
     <Wrapper>
       <Row>
-        <CheckBox />
-        <Context>Learn English</Context>
+        <CheckBox checked={isCompleted} />
+        <Context>{context}</Context>
       </Row>
       <DeleteBtn>
         <FaTrashAlt />
